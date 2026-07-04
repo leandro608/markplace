@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import {
   AMAZON_CATEGORIES,
-  AMAZON_COSTS_LAST_UPDATE,
   getCategoryCommissionDescription,
 } from './data/amazonCategories'
 import {
@@ -13,6 +12,8 @@ import { calculatePricing, DEFAULT_INPUTS } from './lib/pricingEngine'
 import type { LogisticsType, MarginType, PricingInputs, SellerPlan } from './types'
 import { CurrencyInput } from './components/CurrencyInput'
 import { PercentInput } from './components/PercentInput'
+import { PLATFORM_COSTS_REFERENCE } from './data/platformReferences'
+import { ReferenceSourcesCard } from './components/ReferenceSourcesCard'
 import { ResultsPanel } from './components/ResultsPanel'
 import { SectionCard } from './components/SectionCard'
 import { SelectField } from './components/SelectField'
@@ -359,14 +360,17 @@ export default function App() {
           </SectionCard>
         </div>
 
-        <aside>
+        <aside className="space-y-4">
           <ResultsPanel result={result} />
+          <ReferenceSourcesCard />
         </aside>
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-400">
-        Custos de plataforma com referência pública da Amazon Brasil ({AMAZON_COSTS_LAST_UPDATE}):
-        plano individual R$ 2/item, plano profissional R$ {PROFESSIONAL_PLAN_MONTHLY_FEE_2026}/mês
+        Custos de plataforma com referência pública da Amazon Brasil (
+        {PLATFORM_COSTS_REFERENCE.versionLabel}; revisado em{' '}
+        {PLATFORM_COSTS_REFERENCE.lastReviewedAt}): plano individual R$ 2/item, plano profissional
+        R$ {PROFESSIONAL_PLAN_MONTHLY_FEE_2026}/mês
         (após 12 meses) e comissão por categoria com mínimo de R$ 1 ou R$ 2 por item. Confirme
         sempre no Seller Central antes de precificar.
       </footer>

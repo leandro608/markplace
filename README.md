@@ -43,6 +43,22 @@ Como vários custos são percentuais sobre P (comissão, impostos, ads, etc.), o
 - Plano Profissional: **R$ 19,00/mês** (com promoção de 1º ano grátis para novos sellers)
 - Comissão por categoria: **10% a 15%**, com mínimos por item de **R$ 1,00** ou **R$ 2,00**
 
+## Governança de atualização
+
+- A interface exibe um card com:
+  - data da última revisão
+  - links oficiais de consulta
+  - checklist operacional de atualização
+- Os metadados e fontes ficam centralizados em:
+  - `src/data/platformReferences.ts`
+
+### Rotina recomendada
+
+1. Revisar páginas oficiais da Amazon.
+2. Ajustar categorias/taxas em `src/data/amazonCategories.ts`.
+3. Atualizar metadados em `src/data/platformReferences.ts`.
+4. Executar `npm run build` antes de publicar.
+
 ## Aviso
 
 Taxas baseadas nas informações públicas da Amazon Brasil. Sempre confirme valores atualizados no [Seller Central](https://sellercentral.amazon.com.br/).
