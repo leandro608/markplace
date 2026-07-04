@@ -10,6 +10,33 @@ export const PLATFORM_COSTS_REFERENCE = {
   lastReviewedAt: '2026-07-04',
   reviewOwner: 'Time de precificação',
   updateCadence: 'Revisão mensal ou sempre que a Amazon alterar as tarifas',
+  staleAfterDays: 30,
+}
+
+export interface PlatformReviewStatus {
+  daysSinceReview: number
+  isStale: boolean
+  nextReviewInDays: number
+}
+
+function parseIsoDateToUTC(date: string): Date {
+  const [year, month, day] = date.split('-').map(Number)
+  return new Date(Date.UTC(year, (month ?? 1) - 1, day ?? 1))
+}
+
+export function getPlatformReviewStatus(
+  lastReviewedAt: string,
+  staleAfterDays: number,
+  now: Date = new Date(),
+): PlatformReviewStatus {
+  const reviewDate = parseIsoDateToUTC(lastReviewedAt)
+  const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
+  const diffMs = todayUTC.getTime() - reviewDate.getTime()
+  const daysSinceReview = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)))
+  const isStale = daysSinceReview > staleAfterDays
+  const nextReviewInDays = Math.max(0, staleAfterDays - daysSinceReview)
+
+  return { daysSinceReview, isStale, nextReviewInDays }
 }
 
 export const PLATFORM_REFERENCE_SOURCES: PlatformReferenceSource[] = [

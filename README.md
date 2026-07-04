@@ -49,6 +49,7 @@ Como vários custos são percentuais sobre P (comissão, impostos, ads, etc.), o
   - data da última revisão
   - links oficiais de consulta
   - checklist operacional de atualização
+  - alerta automático quando a revisão ultrapassa 30 dias
 - Os metadados e fontes ficam centralizados em:
   - `src/data/platformReferences.ts`
 
