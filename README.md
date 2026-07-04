@@ -50,6 +50,7 @@ Como vários custos são percentuais sobre P (comissão, impostos, ads, etc.), o
   - links oficiais de consulta
   - checklist operacional de atualização
   - alerta automático quando a revisão ultrapassa 30 dias
+- Também exibe um **badge global no topo da página** quando a revisão está vencida
 - Os metadados e fontes ficam centralizados em:
   - `src/data/platformReferences.ts`
 
