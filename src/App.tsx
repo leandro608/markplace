@@ -1,6 +1,14 @@
 import { useMemo, useState } from 'react'
-import { AMAZON_CATEGORIES } from './data/amazonCategories'
-import { LOGISTICS_OPTIONS, SELLER_PLANS } from './data/logisticsOptions'
+import {
+  AMAZON_CATEGORIES,
+  AMAZON_COSTS_LAST_UPDATE,
+  getCategoryCommissionDescription,
+} from './data/amazonCategories'
+import {
+  LOGISTICS_OPTIONS,
+  PROFESSIONAL_PLAN_MONTHLY_FEE_2026,
+  SELLER_PLANS,
+} from './data/logisticsOptions'
 import { calculatePricing, DEFAULT_INPUTS } from './lib/pricingEngine'
 import type { LogisticsType, MarginType, PricingInputs, SellerPlan } from './types'
 import { CurrencyInput } from './components/CurrencyInput'
@@ -123,7 +131,13 @@ export default function App() {
               <SelectField
                 label="Categoria do produto"
                 value={inputs.categoryId}
-                options={AMAZON_CATEGORIES.map((c) => ({ id: c.id, name: c.name }))}
+                options={AMAZON_CATEGORIES.map((c) => ({
+                  id: c.id,
+                  name: c.name,
+                  description: `${getCategoryCommissionDescription(c)}${
+                    c.notes ? ` — ${c.notes}` : ''
+                  }`,
+                }))}
                 onChange={(v) => updateField(setInputs, 'categoryId', v)}
               />
               <SelectField
@@ -139,24 +153,73 @@ export default function App() {
             </div>
 
             {inputs.sellerPlan === 'professional' && (
-              <label className="block">
-                <span className="mb-1 block text-sm font-medium text-slate-700">
-                  Unidades vendidas por mês
-                </span>
-                <input
-                  type="number"
-                  min={1}
-                  step={1}
-                  value={inputs.monthlyUnits || ''}
-                  onChange={(e) =>
-                    updateField(setInputs, 'monthlyUnits', Math.max(parseInt(e.target.value) || 1, 1))
-                  }
-                  className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 px-3 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-100"
-                />
-                <span className="mt-1 block text-xs text-slate-400">
-                  Para ratear a mensalidade de R$ 19,00
-                </span>
-              </label>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="block sm:col-span-2">
+                  <span className="mb-1 block text-sm font-medium text-slate-700">
+                    Promoção 1º ano grátis (julho/2026)
+                  </span>
+                  <label className="inline-flex items-center gap-2 text-sm text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={inputs.professionalFirstYearFree}
+                      onChange={(e) =>
+                        updateField(setInputs, 'professionalFirstYearFree', e.target.checked)
+                      }
+                      className="rounded border-slate-300 text-amber-500 focus:ring-amber-400"
+                    />
+                    Aplicar mensalidade zerada nos primeiros 12 meses
+                  </label>
+                </label>
+
+                <label className="block">
+                  <span className="mb-1 block text-sm font-medium text-slate-700">
+                    Meses desde o cadastro
+                  </span>
+                  <input
+                    type="number"
+                    min={1}
+                    step={1}
+                    value={inputs.monthsSinceRegistration || ''}
+                    onChange={(e) =>
+                      updateField(
+                        setInputs,
+                        'monthsSinceRegistration',
+                        Math.max(parseInt(e.target.value) || 1, 1),
+                      )
+                    }
+                    className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 px-3 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-100"
+                  />
+                </label>
+
+                <label className="block">
+                  <span className="mb-1 block text-sm font-medium text-slate-700">
+                    Unidades vendidas por mês
+                  </span>
+                  <input
+                    type="number"
+                    min={1}
+                    step={1}
+                    value={inputs.monthlyUnits || ''}
+                    onChange={(e) =>
+                      updateField(setInputs, 'monthlyUnits', Math.max(parseInt(e.target.value) || 1, 1))
+                    }
+                    className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 px-3 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:bg-white focus:ring-2 focus:ring-amber-100"
+                  />
+                </label>
+
+                {!inputs.professionalFirstYearFree || inputs.monthsSinceRegistration > 12 ? (
+                  <CurrencyInput
+                    label="Mensalidade do plano Profissional"
+                    hint="Valor atual após período promocional"
+                    value={inputs.monthlyPlanFee}
+                    onChange={(v) => updateField(setInputs, 'monthlyPlanFee', v)}
+                  />
+                ) : (
+                  <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-700">
+                    Mensalidade aplicada como <strong>R$ 0,00</strong> por estar no 1º ano.
+                  </div>
+                )}
+              </div>
             )}
 
             <label className="flex items-center gap-2 text-sm text-slate-700">
@@ -302,8 +365,10 @@ export default function App() {
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-400">
-        Valores de referência baseados nas tarifas públicas da Amazon Brasil. Confirme sempre no
-        Seller Central antes de precificar.
+        Custos de plataforma com referência pública da Amazon Brasil ({AMAZON_COSTS_LAST_UPDATE}):
+        plano individual R$ 2/item, plano profissional R$ {PROFESSIONAL_PLAN_MONTHLY_FEE_2026}/mês
+        (após 12 meses) e comissão por categoria com mínimo de R$ 1 ou R$ 2 por item. Confirme
+        sempre no Seller Central antes de precificar.
       </footer>
     </div>
   )

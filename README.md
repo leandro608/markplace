@@ -5,8 +5,8 @@ Calculadora **inversa** de precificação para vendedores na Amazon Brasil. Info
 ## Funcionalidades
 
 - **Custos fixos**: produto, embalagem, logística (FBA/DBA/FBM), custo fixo por unidade
-- **Comissão Amazon**: por categoria (com regras progressivas para móveis e acessórios eletrônicos) ou personalizada
-- **Plano de vendedor**: Individual (R$ 2/un) ou Profissional (mensalidade rateada)
+- **Comissão Amazon (ref. julho/2026)**: por categoria com comissão mínima de R$ 1,00 ou R$ 2,00, além de regras progressivas para móveis e acessórios eletrônicos
+- **Plano de vendedor (ref. julho/2026)**: Individual (R$ 2/un) ou Profissional (R$ 19/mês), com opção de promoção de 1º ano grátis
 - **Custos variáveis**: impostos, campanhas, ads, cupons, afiliados, parcelamento, devoluções
 - **Margem desejada**: percentual sobre preço ou valor fixo em R$
 - **Resultado**: preço sugerido, breakdown completo e margem de contribuição
@@ -36,6 +36,12 @@ P = Custos Fixos + Custos Variáveis(P) + Margem Desejada
 ```
 
 Como vários custos são percentuais sobre P (comissão, impostos, ads, etc.), o cálculo usa busca binária para encontrar o preço exato que atinge sua margem.
+
+## Referência de custos de plataforma (julho/2026)
+
+- Plano Individual: **R$ 2,00 por item vendido**
+- Plano Profissional: **R$ 19,00/mês** (com promoção de 1º ano grátis para novos sellers)
+- Comissão por categoria: **10% a 15%**, com mínimos por item de **R$ 1,00** ou **R$ 2,00**
 
 ## Aviso
 

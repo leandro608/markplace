@@ -17,6 +17,7 @@ export interface AmazonCategory {
   id: string
   name: string
   commission: CommissionRule
+  notes?: string
 }
 
 export interface PricingInputs {
@@ -34,6 +35,8 @@ export interface PricingInputs {
   sellerPlan: SellerPlan
   monthlyUnits: number
   monthlyPlanFee: number
+  professionalFirstYearFree: boolean
+  monthsSinceRegistration: number
 
   taxRate: number
   campaignRate: number

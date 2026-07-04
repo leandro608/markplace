@@ -1,5 +1,8 @@
 import type { LogisticsType } from '../types'
 
+export const PROFESSIONAL_PLAN_MONTHLY_FEE_2026 = 19
+export const INDIVIDUAL_PLAN_PER_ITEM_FEE_2026 = 2
+
 export interface LogisticsOption {
   id: LogisticsType
   name: string
@@ -38,15 +41,15 @@ export const SELLER_PLANS = [
   {
     id: 'individual' as const,
     name: 'Plano Individual',
-    description: 'R$ 2,00 por item vendido (sem mensalidade)',
-    perItemFee: 2,
+    description: 'R$ 2,00 por item vendido (sem mensalidade) — referência julho/2026',
+    perItemFee: INDIVIDUAL_PLAN_PER_ITEM_FEE_2026,
     monthlyFee: 0,
   },
   {
     id: 'professional' as const,
     name: 'Plano Profissional',
-    description: 'Mensalidade de R$ 19,00 (rateada por unidade vendida)',
+    description: 'R$ 19,00/mês a partir do 13º mês (1º ano grátis para novos sellers)',
     perItemFee: 0,
-    monthlyFee: 19,
+    monthlyFee: PROFESSIONAL_PLAN_MONTHLY_FEE_2026,
   },
 ]

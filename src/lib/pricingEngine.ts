@@ -44,8 +44,14 @@ function getPlanCostPerUnit(inputs: PricingInputs): number {
   if (inputs.sellerPlan === 'individual') {
     return plan.perItemFee
   }
+  const isPromotionalPeriod =
+    inputs.professionalFirstYearFree && inputs.monthsSinceRegistration <= 12
+  if (isPromotionalPeriod) {
+    return 0
+  }
   const units = Math.max(inputs.monthlyUnits, 1)
-  return plan.monthlyFee / units
+  const monthlyFee = Math.max(inputs.monthlyPlanFee, 0)
+  return monthlyFee / units
 }
 
 function getFixedCosts(inputs: PricingInputs): number {
@@ -127,7 +133,9 @@ function calculateCostsAtPrice(
       label:
         inputs.sellerPlan === 'individual'
           ? 'Taxa plano Individual (R$ 2/un)'
-          : 'Mensalidade rateada',
+          : inputs.professionalFirstYearFree && inputs.monthsSinceRegistration <= 12
+            ? 'Plano Profissional (promo 1º ano grátis)'
+            : 'Mensalidade plano Profissional rateada',
       value: planCost,
       group: 'fixed',
     },
@@ -270,6 +278,16 @@ function buildWarnings(inputs: PricingInputs, price: number): string[] {
     )
   }
 
+  if (
+    inputs.sellerPlan === 'professional' &&
+    inputs.professionalFirstYearFree &&
+    inputs.monthsSinceRegistration > 12
+  ) {
+    warnings.push(
+      'Você marcou a promoção do plano Profissional, mas informou mais de 12 meses de conta. Revise para evitar distorção no preço.',
+    )
+  }
+
   return warnings
 }
 
@@ -342,6 +360,8 @@ export const DEFAULT_INPUTS: PricingInputs = {
   sellerPlan: 'individual',
   monthlyUnits: 100,
   monthlyPlanFee: 19,
+  professionalFirstYearFree: true,
+  monthsSinceRegistration: 1,
 
   taxRate: 6,
   campaignRate: 5,
