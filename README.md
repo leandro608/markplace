@@ -28,6 +28,22 @@ npm run build
 npm run preview
 ```
 
+## Deploy no Cloudflare (Workers/Pages)
+
+Este repositório já inclui `wrangler.jsonc` apontando para os assets em `dist`.
+
+Depois do build, você pode usar:
+
+```bash
+npx wrangler versions upload
+```
+
+Se preferir Cloudflare Pages com comando explícito:
+
+```bash
+npx wrangler pages deploy dist --project-name calculadora-amazon-br
+```
+
 ## Fórmula
 
 A calculadora resolve o preço de venda (P) de forma inversa:
