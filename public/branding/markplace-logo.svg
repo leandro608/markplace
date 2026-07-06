@@ -1,0 +1,10 @@
+<svg width="220" height="260" viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="260" fill="#F6EA00"/>
+  <ellipse cx="110" cy="60" rx="72" ry="16" fill="#111111"/>
+  <path d="M68 56C72 35 88 22 110 22C132 22 148 35 152 56H68Z" fill="#111111"/>
+  <path d="M50 156L84 76H136L170 156H50Z" fill="#111111"/>
+  <path d="M110 103L93 95L110 87L127 95L110 103Z" stroke="#F6EA00" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M93 95L93 108L110 116L127 108V95" stroke="#F6EA00" stroke-width="3" stroke-linejoin="round"/>
+  <text x="18" y="202" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="800" fill="#111111">MARK</text>
+  <text x="20" y="246" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="400" fill="#111111">PLACE</text>
+</svg>

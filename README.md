@@ -4,6 +4,7 @@ Calculadora **inversa** de precificação para vendedores na Amazon Brasil. Info
 
 ## Funcionalidades
 
+- **Identidade visual de marca**: exibição dos logotipos Markplace e Amazon no topo da calculadora
 - **Custos fixos**: produto, embalagem, logística (FBA/DBA/FBM), custo fixo por unidade
 - **Comissão Amazon (ref. julho/2026)**: por categoria com comissão mínima de R$ 1,00 ou R$ 2,00, além de regras progressivas para móveis e acessórios eletrônicos
 - **Plano de vendedor (ref. julho/2026)**: Individual (R$ 2/un) ou Profissional (R$ 19/mês), com opção de promoção de 1º ano grátis

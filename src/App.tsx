@@ -77,10 +77,14 @@ export default function App() {
       )}
 
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400 text-lg font-bold text-slate-900">
-              a
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl border border-slate-200 bg-yellow-100 p-1.5">
+              <img
+                src="/branding/markplace-logo.svg"
+                alt="Logo da Markplace"
+                className="h-14 w-auto rounded-md object-contain sm:h-16"
+              />
             </div>
             <div>
               <h1 className="text-lg font-bold text-slate-900 sm:text-xl">
@@ -90,6 +94,16 @@ export default function App() {
                 Precificação inversa com todos os custos e margem de contribuição
               </p>
             </div>
+          </div>
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+              Referência marketplace
+            </span>
+            <img
+              src="/branding/amazon-logo.svg"
+              alt="Logo da Amazon"
+              className="h-8 w-auto object-contain sm:h-9"
+            />
           </div>
         </div>
       </header>
