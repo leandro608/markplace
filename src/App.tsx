@@ -97,11 +97,16 @@ export default function App() {
           </div>
           <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
             <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-              Referência marketplace
+              Marcas
             </span>
             <img
               src="/branding/amazon-logo.svg"
               alt="Logo da Amazon"
+              className="h-8 w-auto object-contain sm:h-9"
+            />
+            <img
+              src="/branding/seatco-logo.svg"
+              alt="Logo da Seat&Co"
               className="h-8 w-auto object-contain sm:h-9"
             />
           </div>
